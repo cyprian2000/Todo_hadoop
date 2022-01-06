@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if messages %}
+    {% for message in messages %}
+    
+   
+        <div class= "alert alert-warning alert-dismissable" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+             
+            </button>
+            
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if all_items %}
+        <table class="table table-bordered">
+        {% for things in all_items %}
+            {%if things.completed %}
+        
+                 <tr class="table-secondary">
+             <td class="striker"> <a href="{% url 'edit' things.id %}">{{ things.item }}</a> </td> 
+             <td><center> <a href="{% url 'uncross' things.id%}">Uncross</a> </center></td>
+             <td><center> <a href="{% url 'delete' things.id %}">Delete</a> </center></td>
+                 </tr>
+            {% else %}
+            <tr>
+                <td> <a href="{% url 'edit' things.id %}">{{ things.item }}</a></td> 
+                <td> <center><a href="{% url 'cross_off' things.id%}">Cross off</a></center> </td>
+                <td><center> <a href="{% url 'delete' things.id %}">Delete</a> </center></td>
+                    </tr>
+            {% endif %}
+        {% endfor %}
+        </table>
+    {% endif %}
+    <h6>What is Hadoop Architecture? </h6>
+    <p style="text-align: justify; "> Hadoop has a master-slave topology. In this topology, we have one master node and multiple slave nodes. Master node’s function is to assign a task to various slave nodes and manage resources. The slave nodes do the actual computing. Slave nodes store the real data whereas on master we have metadata. This means it stores data about data. </p>
+    <br/>
+    <center> <h5> Narrative Report </h5></center>
+    <hr/>
+    <p> Hadoop is a Java-based Apache open source platform that enables for the distributed processing of huge datasets across clusters of machines using simple programming techniques. The Hadoop framework application operates in a computing environment that allows for distributed storage and computation across computer clusters.
+         Hadoop Cluster Architecture In a distributed computing environment, Hadoop is used to store and analyze large volumes of unstructured data.</p>
+    
+    
+    <h5>Hadoop Architecture comprises three major layers.</h5>
+        <ul>
+            <li><p> HDFS (Hadoop Distributed File System) - It provides for data storage of Hadoop. HDFS splits the data unit into smaller units called blocks and stores them in a distributed manner</p></li>
+            <li><p> Yarn - YARN or Yet Another Resource Negotiator is the resource management layer of Hadoop. </p></li>
+            <li><p> MapReduce - It provides for data storage of Hadoop. HDFS splits the data unit into smaller units called blocks and stores them in a distributed manner. </p></li>
+        </ul>
+        <center> <h6>HDFS has a Master-slave architecture </h6>
+            <img src="{% static 'todo_list/image/Hadoop-Architecture.jpg' %}" width="600px"alt="">
+        </center>
+
+    <h5> Prerequisite To Install Hadoop</h5>
+    <ul>
+        <li> Java should be installed in the system before installing Hadoop. </li>
+        <li> Download Hadoop zip</li>
+    </ul>
+
+    <div class="row">
+
+    <div class= "col s3 center-align">
+    <h6>localhost:50070 in a browser tab to verify namenode health.</h6>
+    <img src="{% static 'todo_list/image/Hadoop.jpg' %}" width="600px"alt="">
+    </div>
+    <div class= "col s3 center-align">
+    <h6>localhost:8088 in a browser tab to check resourcemanager details.
+    </h6>
+    <img src="{% static 'todo_list/image/Hadoop_cluster.jpg' %}" width="600px"alt="">
+    </div>
+    
+</div>
+{% endblock %}
